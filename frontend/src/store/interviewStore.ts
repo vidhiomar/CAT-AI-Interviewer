@@ -33,6 +33,8 @@ interface InterviewState {
 
   incrementQuestionCount: () => void;
 
+  resetInterview: () => void;
+
   setCurrentTopic: (
     topic: string
   ) => void;
@@ -107,5 +109,15 @@ export const useInterviewStore =
     setReport: (report) =>
       set({
         report,
+      }),
+
+    resetInterview: () =>
+      set({
+        currentQuestion: "",
+        questionCount: 1,
+        conversation: [],
+        currentTopic: "",
+        topicDepth: 0,
+        report: null,
       }),
   }));
