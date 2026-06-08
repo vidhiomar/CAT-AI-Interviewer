@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.env/
+.venv/
+env/
+
+# Environment Variables
+.env
+.env.*
+
+# IDEs
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build / Distribution
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type Checking
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary Files
+*.tmp
+*.temp
+
+# SQLite Databases
+*.db
+*.sqlite3
+
+# Uploaded Files
+uploads/
+media/
+
+# Generated PDFs
+*.pdf
+
+# FastAPI / Uvicorn
+uvicorn.log
+
+# PyCharm
+.idea/
+
+# VS Code Workspace Settings
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Windows-specific paths accidentally created
+services/C:*/
