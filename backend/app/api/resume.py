@@ -43,7 +43,7 @@ async def upload_resume(
         return {
             "success": True,
             "profile": profile,
-            "first_question": first_question
+            "question": first_question
         }
 
     except Exception as e:

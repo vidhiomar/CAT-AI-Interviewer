@@ -10,7 +10,9 @@ class AnswerRequest(BaseModel):
     profile: Dict[str, Any]
     previous_question: str
     candidate_answer: str
-
+    conversation_history: List[Dict[str, str]]
+    current_topic: str
+    topic_depth: int
 
 class QAPair(BaseModel):
     question: str

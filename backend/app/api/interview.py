@@ -64,10 +64,13 @@ async def answer_question(
         )
 
         next_question = generate_followup_question(
-            profile=profile_json,
-            previous_question=request.previous_question,
-            candidate_answer=request.candidate_answer
-        )
+    profile=profile_json,
+    previous_question=request.previous_question,
+    candidate_answer=request.candidate_answer,
+    conversation_history=request.conversation_history,
+    current_topic=request.current_topic,
+    topic_depth=request.topic_depth
+)
 
         return {
             "success": True,

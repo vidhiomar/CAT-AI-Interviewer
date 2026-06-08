@@ -31,7 +31,18 @@ Can you tell me more about your experience leading the marketing campaign for XY
     return generate_response(prompt)
 
 
-def generate_followup_question(profile , previous_question, candidate_answer):
+def generate_followup_question(
+    profile,
+    previous_question,
+    candidate_answer,
+    conversation_history,
+    current_topic,
+    topic_depth):
+    
+    switch_topic = False
+
+    if topic_depth >= 3:
+        switch_topic = True
 
     prompt = f"""
 You are an experienced CAT MBA interviewer.
@@ -39,27 +50,45 @@ You are an experienced CAT MBA interviewer.
 Candidate Profile:
 {profile}
 
-Previous Question Asked:
-{previous_question} 
+Conversation History:
+{conversation_history}
 
-Candidate's Answer:
-{candidate_answer}  
+Current Topic:
+{current_topic}
+
+Topic Depth:
+{topic_depth}
+
+Previous Question:
+{previous_question}
+
+Candidate Answer:
+{candidate_answer}
 
 TASK:
-Generate the best follow-up interview question.
+Generate the next interview question.
 
 Rules:
-Rules:
+
 - Ask exactly ONE question.
-- Build naturally on the previous answer.
-- Do not repeat or rephrase the previous question.
-- Challenge vague statements and ask for specifics.
-- Ask about decisions, trade-offs, impact, results, failures, or lessons learned.
-- If a technical concept or project is mentioned, ask the candidate to explain it more deeply.
-- Stay on the current topic unless the discussion has been sufficiently explored.
-- Be conversational and interview-like.
-- Return only the question.
 
+- If topic depth is less than 3:
+  Continue exploring the current topic.
+
+- If topic depth is 3 or more:
+  Move naturally to another important area of the resume.
+
+Possible new areas:
+- Another project
+- Internship
+- Leadership
+- Achievement
+- Teamwork
+- MBA goals
+
+- Do not repeatedly ask about the same technical detail.
+- Keep the interview balanced.
+- Return only the question.
 """
 
     return generate_response(prompt).strip()
