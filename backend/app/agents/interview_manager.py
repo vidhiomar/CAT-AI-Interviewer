@@ -25,6 +25,41 @@ Rules:
 
 Example:
 Can you tell me more about your experience leading the marketing campaign for XYZ product during your internship at ABC company?
+
+"""
+
+    return generate_response(prompt)
+
+
+def generate_followup_question(profile , previous_question, candidate_answer):
+
+    prompt = f"""
+You are an experienced CAT MBA interviewer.
+
+Candidate Profile:
+{profile}
+
+Previous Question Asked:
+{previous_question} 
+
+Candidate's Answer:
+{candidate_answer}  
+
+TASK:
+Generate the best follow-up interview question.
+
+Rules:
+Rules:
+- Ask exactly ONE question.
+- Build naturally on the previous answer.
+- Do not repeat or rephrase the previous question.
+- Challenge vague statements and ask for specifics.
+- Ask about decisions, trade-offs, impact, results, failures, or lessons learned.
+- If a technical concept or project is mentioned, ask the candidate to explain it more deeply.
+- Stay on the current topic unless the discussion has been sufficiently explored.
+- Be conversational and interview-like.
+- Return only the question.
+
 """
 
     return generate_response(prompt).strip()
