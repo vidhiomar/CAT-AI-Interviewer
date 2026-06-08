@@ -3,6 +3,7 @@ import tempfile
 import os
 from app.services.pdf_service import extract_text_from_pdf
 from app.agents.resume_analyzer import analyze_resume
+from app.agents.interview_manager import generate_first_question
 
 router = APIRouter()
 
@@ -37,9 +38,12 @@ async def upload_resume(
 
         profile = analyze_resume(resume_text)
 
+        first_question = generate_first_question(profile)
+
         return {
             "success": True,
-            "profile": profile
+            "profile": profile,
+            "first_question": first_question
         }
 
     except Exception as e:
