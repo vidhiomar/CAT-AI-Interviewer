@@ -57,7 +57,6 @@ export default function InterviewPage() {
         answer
       );
 
-      // Interview completed
       if (questionCount >= MAX_QUESTIONS) {
         const reportResponse =
           await api.post(

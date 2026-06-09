@@ -19,27 +19,37 @@ export default function ReportPage() {
         Interview Report
       </h1>
 
-      <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="border rounded-xl p-4">
-          <h2 className="font-semibold">
-            Overall Score
-          </h2>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+  <div className="border rounded-xl p-4">
+    <h2 className="font-semibold">
+      Overall Score
+    </h2>
 
-          <p className="text-3xl font-bold">
-            {report.overall_score}/10
-          </p>
-        </div>
+    <p className="text-3xl font-bold">
+      {report.overall_score}/10
+    </p>
+  </div>
 
-        <div className="border rounded-xl p-4">
-          <h2 className="font-semibold">
-            Recommendation
-          </h2>
+  <div className="border rounded-xl p-4">
+    <h2 className="font-semibold">
+      MBA Readiness
+    </h2>
 
-          <p className="text-xl font-bold">
-            {report.final_recommendation}
-          </p>
-        </div>
-      </div>
+    <p className="text-3xl font-bold">
+      {report.mba_readiness}/100
+    </p>
+  </div>
+
+  <div className="border rounded-xl p-4">
+    <h2 className="font-semibold">
+      Recommendation
+    </h2>
+
+    <p className="text-xl font-bold">
+      {report.final_recommendation}
+    </p>
+  </div>
+</div>
 
       <div className="grid grid-cols-2 gap-4 mb-8">
         <div className="border rounded-xl p-4">
