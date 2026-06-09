@@ -9,6 +9,8 @@ import { useInterviewStore } from "@/store/interviewStore";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
+import { Loader2 } from "lucide-react";
 
 const MAX_QUESTIONS = 10;
 
@@ -125,10 +127,26 @@ export default function InterviewPage() {
         CAT AI Interviewer
       </h1>
 
-      <p className="text-muted-foreground mb-2">
-        Question {questionCount} /{" "}
-        {MAX_QUESTIONS}
-      </p>
+      <div className="mb-6">
+        <div className="flex justify-between text-sm text-muted-foreground mb-2">
+            <span>
+            Question {questionCount} of {MAX_QUESTIONS}
+            </span>
+
+            <span>
+            {Math.round(
+                (questionCount / MAX_QUESTIONS) * 100
+            )}
+            %
+            </span>
+        </div>
+
+        <Progress
+            value={
+            (questionCount / MAX_QUESTIONS) * 100
+            }
+        />
+        </div>
 
       <p className="text-sm text-muted-foreground mb-6">
         Current Topic:{" "}
@@ -136,9 +154,15 @@ export default function InterviewPage() {
           "Resume Discussion"}
       </p>
 
-      <div className="border rounded-xl p-6 mb-6 text-lg leading-relaxed">
-        {currentQuestion}
-      </div>
+      <div className="border rounded-xl p-6 mb-6 bg-card shadow-sm">
+            <p className="text-sm text-muted-foreground mb-2">
+                AI Interviewer
+            </p>
+
+            <p className="text-lg leading-relaxed font-medium">
+                {currentQuestion}
+            </p>
+        </div>
 
       <Textarea
         placeholder="Type your answer here..."
@@ -153,14 +177,18 @@ export default function InterviewPage() {
         className="mt-4"
         onClick={handleSubmit}
         disabled={loading}
-      >
-        {loading
-          ? "Generating..."
-          : questionCount >=
-            MAX_QUESTIONS
-          ? "Finish Interview"
-          : "Submit Answer"}
-      </Button>
+        >
+        {loading ? (
+            <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            AI is thinking...
+            </>
+        ) : questionCount >= MAX_QUESTIONS ? (
+            "Finish Interview"
+        ) : (
+            "Submit Answer"
+        )}
+        </Button>
     </div>
   );
 }
