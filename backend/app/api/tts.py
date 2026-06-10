@@ -13,11 +13,11 @@ async def speak(data: dict):
 
     text = data["text"]
 
-    audio_path = generate_speech(
+    audio_path = await generate_speech(
         text
     )
 
     return FileResponse(
         audio_path,
-        media_type="audio/wav"
+        media_type="audio/mpeg"
     )
