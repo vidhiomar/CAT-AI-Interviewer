@@ -3,6 +3,7 @@
 import { useInterviewStore } from "@/store/interviewStore";
 import { Progress } from "@/components/ui/progress";
 
+
 export default function ReportPage() {
   const { report } = useInterviewStore();
 
@@ -37,8 +38,9 @@ export default function ReportPage() {
 
       <div className="mb-10">
         <h1 className="text-4xl font-bold">
-          Interview Completed 🎉
+          Interview Completed!
         </h1>
+
 
         <p className="text-muted-foreground mt-2">
           Here's your detailed CAT MBA
