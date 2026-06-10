@@ -5,3 +5,6 @@ groq
 pydantic 
 python-multipart
 python-dotenv
+kokoro
+soundfile
+torch

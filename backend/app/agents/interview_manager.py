@@ -22,6 +22,9 @@ Rules:
 - Return only the question.
 - Do not include numbers or bullet points in the question.
 - Do not include any introductory text or explanations.
+- Keep every question under 20 words.
+- Ask concise MBA-style questions.
+- Avoid long technical wording.
 
 Example:
 Can you tell me more about your experience leading the marketing campaign for XYZ product during your internship at ABC company?
@@ -71,7 +74,9 @@ Generate the next interview question.
 Rules:
 
 - Ask exactly ONE question.
-
+- Keep every question under 20 words.
+- Ask concise MBA-style questions.
+- Avoid long technical wording.
 - If topic depth is less than 3:
   Continue exploring the current topic.
 
