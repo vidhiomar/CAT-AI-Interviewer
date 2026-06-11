@@ -8,26 +8,24 @@ model = WhisperModel(
     compute_type="int8"
 )
 
-def transcribe_audio(audio_file):
-    # Handle FastAPI UploadFile
-    if hasattr(audio_file, "file"):
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".webm") as temp_audio:
-            temp_audio.write(audio_file.file.read())
-            temp_audio_path = temp_audio.name
-            
-        try:
-            segments, _ = model.transcribe(temp_audio_path)
-            text = ""
-            for segment in segments:
-                text += segment.text + " "
-            return text.strip()
-        finally:
-            os.remove(temp_audio_path)
-            
-    else:
-        # Fallback for direct path
-        segments, _ = model.transcribe(audio_file)
-        text = ""
-        for segment in segments:
-            text += segment.text + " "
+def transcribe_audio(audio_bytes: bytes, filename: str = "audio.webm") -> str:
+    # Determine extension from filename
+    ext = os.path.splitext(filename)[-1] or ".webm"
+    
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+            tmp.write(audio_bytes)
+            tmp_path = tmp.name
+
+        segments, _ = model.transcribe(tmp_path)
+        text = " ".join(segment.text for segment in segments)
         return text.strip()
+
+    except Exception as e:
+        print(f"[STT ERROR] Failed to transcribe audio ({filename}): {e}")
+        return ""
+
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            os.remove(tmp_path)

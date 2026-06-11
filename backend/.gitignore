@@ -68,3 +68,7 @@ uvicorn.log
 
 # Windows-specific paths accidentally created
 services/C:*/
+
+# Node.js (in case of accidental npm runs)
+node_modules/
+package-lock.json

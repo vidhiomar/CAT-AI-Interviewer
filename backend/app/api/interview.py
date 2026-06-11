@@ -103,9 +103,15 @@ async def evaluate(
             for pair in request.qa_pairs
         ]
 
+        proctor_events = [
+            {"type": e.type, "timestamp": e.timestamp}
+            for e in (request.proctor_events or [])
+        ]
+
         report = evaluate_interview(
             profile=request.profile,
-            qa_pairs=qa_pairs
+            qa_pairs=qa_pairs,
+            proctor_events=proctor_events if proctor_events else None
         )
 
         return {

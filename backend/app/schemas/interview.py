@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 
 class StartInterviewRequest(BaseModel):
@@ -18,7 +18,11 @@ class QAPair(BaseModel):
     question: str
     answer: str
 
+class ProctorEventItem(BaseModel):
+    type: str
+    timestamp: Optional[str] = None
 
 class EvaluationRequest(BaseModel):
     profile: Dict[str, Any]
     qa_pairs: List[QAPair]
+    proctor_events: Optional[List[ProctorEventItem]] = []

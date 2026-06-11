@@ -4,7 +4,7 @@ from app.services.groq_service import generate_response
 def generate_first_question(profile):
 
     prompt = f"""
-You are an experienced CAT MBA interviewer.
+You are a rigorous and experienced IIM MBA panel interviewer.
 
 Candidate Profile:
 
@@ -18,13 +18,13 @@ Rules:
 - Make it personalized using the candidate resume.
 - Prefer projects, internships, leadership experiences, achievements or technical work.
 - Do not ask generic questions like "Tell me about yourself" if resume contains strong projects.
-- The question should be conversational and interview-like, not too formal or robotic.
+- The question should be conversational, probing, and interview-like, typical of IIM panels.
 - Return only the question.
 - Do not include numbers or bullet points in the question.
-- Do not include any introductory text or explanations.
+- Do not include any introductory text, pleasantries, or explanations.
 - Keep every question under 20 words.
 - Ask concise MBA-style questions.
-- Avoid long technical wording.
+- Avoid long technical wording, focus on impact and management potential.
 
 Example:
 Can you tell me more about your experience leading the marketing campaign for XYZ product during your internship at ABC company?
@@ -48,7 +48,7 @@ def generate_followup_question(
         switch_topic = True
 
     prompt = f"""
-You are an experienced CAT MBA interviewer.
+You are a rigorous and experienced IIM MBA panel interviewer.
 
 Candidate Profile:
 {profile}
@@ -75,10 +75,12 @@ Rules:
 
 - Ask exactly ONE question.
 - Keep every question under 20 words.
-- Ask concise MBA-style questions.
+- Ask concise, probing MBA-style questions (focus on "why", "how", impact, and decision-making).
 - Avoid long technical wording.
+- DO NOT acknowledge, validate, repeat, or summarize the candidate's previous answer. Immediately ask the next question.
+- Do not use phrases like "That's interesting", "Good to know", or "Building on that".
 - If topic depth is less than 3:
-  Continue exploring the current topic.
+  Continue exploring the current topic with a deeper follow-up.
 
 - If topic depth is 3 or more:
   Move naturally to another important area of the resume.
@@ -92,7 +94,7 @@ Possible new areas:
 - MBA goals
 
 - Do not repeatedly ask about the same technical detail.
-- Keep the interview balanced.
+- Keep the interview balanced and rigorous.
 - Return only the question.
 """
 
