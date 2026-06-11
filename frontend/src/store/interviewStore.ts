@@ -5,45 +5,32 @@ interface QAPair {
   answer: string;
 }
 
+export interface ProctorEvent {
+  type: "TAB_SWITCH" | "WINDOW_BLUR" | "FULLSCREEN_EXIT" | "FACE_MISSING" | "MULTIPLE_FACES" | "LOOKING_AWAY";
+  timestamp: string;
+}
+
 interface InterviewState {
   profile: any;
-
   currentQuestion: string;
-
   questionCount: number;
-
   conversation: QAPair[];
-
   currentTopic: string;
-
   topicDepth: number;
-
   report: any;
+  proctorEvents: ProctorEvent[];
 
   setProfile: (profile: any) => void;
-
-  setCurrentQuestion: (
-    question: string
-  ) => void;
-
-  addConversation: (
-    question: string,
-    answer: string
-  ) => void;
-
+  setCurrentQuestion: (question: string) => void;
+  addConversation: (question: string, answer: string) => void;
   incrementQuestionCount: () => void;
-
   resetInterview: () => void;
-
-  setCurrentTopic: (
-    topic: string
-  ) => void;
-
+  setCurrentTopic: (topic: string) => void;
   incrementTopicDepth: () => void;
-
   resetTopicDepth: () => void;
-
   setReport: (report: any) => void;
+  addProctorEvent: (type: ProctorEvent["type"]) => void;
+  resetProctorEvents: () => void;
 }
 
 export const useInterviewStore =
@@ -51,16 +38,12 @@ export const useInterviewStore =
     profile: null,
 
     currentQuestion: "",
-
     questionCount: 1,
-
     conversation: [],
-
     currentTopic: "",
-
     topicDepth: 0,
-
     report: null,
+    proctorEvents: [],
 
     setProfile: (profile) =>
       set({ profile }),
@@ -107,9 +90,17 @@ export const useInterviewStore =
       }),
 
     setReport: (report) =>
-      set({
-        report,
-      }),
+      set({ report }),
+
+    addProctorEvent: (type) =>
+      set((state) => ({
+        proctorEvents: [
+          ...state.proctorEvents,
+          { type, timestamp: new Date().toISOString() },
+        ],
+      })),
+
+    resetProctorEvents: () => set({ proctorEvents: [] }),
 
     resetInterview: () =>
       set({
@@ -119,5 +110,6 @@ export const useInterviewStore =
         currentTopic: "",
         topicDepth: 0,
         report: null,
+        proctorEvents: [],
       }),
-  }));
+  }));
